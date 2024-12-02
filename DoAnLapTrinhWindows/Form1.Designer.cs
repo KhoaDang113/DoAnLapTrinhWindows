@@ -70,6 +70,7 @@
             // 
             this.txt_password.Location = new System.Drawing.Point(127, 298);
             this.txt_password.Name = "txt_password";
+            this.txt_password.PasswordChar = '*';
             this.txt_password.Size = new System.Drawing.Size(268, 22);
             this.txt_password.TabIndex = 2;
             // 
@@ -93,7 +94,7 @@
             // 
             // btn_logout
             // 
-            this.btn_logout.Location = new System.Drawing.Point(273, 343);
+            this.btn_logout.Location = new System.Drawing.Point(313, 343);
             this.btn_logout.Name = "btn_logout";
             this.btn_logout.Size = new System.Drawing.Size(82, 37);
             this.btn_logout.TabIndex = 4;
@@ -104,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(479, 446);
+            this.ClientSize = new System.Drawing.Size(492, 447);
             this.Controls.Add(this.btn_logout);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
