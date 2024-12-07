@@ -16,7 +16,7 @@ namespace DoAnLapTrinhWindows
 {
     public partial class Login : Form
     {
-        DBModes context = new DBModes();
+        DBModels context = new DBModels();
         public Login()
         {
             InitializeComponent();
@@ -51,9 +51,12 @@ namespace DoAnLapTrinhWindows
             }
         }
 
+
         private void btn_Signup_Click(object sender, EventArgs e)
         {
-
+            Form f = new Sign_Up();
+            f.ShowDialog();
+            this.Close();
         }
     }
 }

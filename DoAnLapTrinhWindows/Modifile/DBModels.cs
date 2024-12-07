@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace DoAnLapTrinhWindows.Modifile
 {
-    public partial class DBModes : DbContext
+    public partial class DBModels : DbContext
     {
-        public DBModes()
-            : base("name=Model1")
+        public DBModels()
+            : base("name=Model12")
         {
         }
 

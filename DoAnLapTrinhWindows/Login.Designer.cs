@@ -102,7 +102,7 @@
             this.btn_Signup.UseVisualStyleBackColor = true;
             this.btn_Signup.Click += new System.EventHandler(this.btn_Signup_Click);
             // 
-            // Form1
+            // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -114,7 +114,7 @@
             this.Controls.Add(this.txt_userName);
             this.Controls.Add(this.btn_login);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
+            this.Name = "Login";
             this.Text = "1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
