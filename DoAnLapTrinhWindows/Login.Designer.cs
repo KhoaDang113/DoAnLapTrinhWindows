@@ -1,6 +1,6 @@
 ﻿namespace DoAnLapTrinhWindows
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_login = new System.Windows.Forms.Button();
             this.txt_userName = new System.Windows.Forms.TextBox();
             this.txt_password = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btn_logout = new System.Windows.Forms.Button();
+            this.btn_Signup = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,21 +92,22 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Password";
             // 
-            // btn_logout
+            // btn_Signup
             // 
-            this.btn_logout.Location = new System.Drawing.Point(313, 343);
-            this.btn_logout.Name = "btn_logout";
-            this.btn_logout.Size = new System.Drawing.Size(82, 37);
-            this.btn_logout.TabIndex = 4;
-            this.btn_logout.Text = "Log out";
-            this.btn_logout.UseVisualStyleBackColor = true;
+            this.btn_Signup.Location = new System.Drawing.Point(313, 343);
+            this.btn_Signup.Name = "btn_Signup";
+            this.btn_Signup.Size = new System.Drawing.Size(82, 37);
+            this.btn_Signup.TabIndex = 4;
+            this.btn_Signup.Text = "Sign Up";
+            this.btn_Signup.UseVisualStyleBackColor = true;
+            this.btn_Signup.Click += new System.EventHandler(this.btn_Signup_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(492, 447);
-            this.Controls.Add(this.btn_logout);
+            this.Controls.Add(this.btn_Signup);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_password);
@@ -129,7 +130,7 @@
         private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btn_logout;
+        private System.Windows.Forms.Button btn_Signup;
     }
 }
 
