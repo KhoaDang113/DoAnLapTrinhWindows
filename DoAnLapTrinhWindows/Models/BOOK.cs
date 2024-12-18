@@ -1,4 +1,4 @@
-namespace DoAnLapTrinhWindows.Modifile
+namespace DoAnLapTrinhWindows.Models
 {
     using System;
     using System.Collections.Generic;

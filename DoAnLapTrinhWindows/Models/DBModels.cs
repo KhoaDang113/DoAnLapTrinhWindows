@@ -3,19 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace DoAnLapTrinhWindows.Modifile
+namespace DoAnLapTrinhWindows.Models
 {
     public partial class DBModels : DbContext
     {
         public DBModels()
-            : base("name=Model12")
+            : base("name=Model13")
         {
         }
 
-        public virtual DbSet<ADMIN_ACCOUNT> ADMIN_ACCOUNT { get; set; }
-        public virtual DbSet<BOOK> BOOKs { get; set; }
+        public virtual DbSet<ADMIN_ACCOUNT> ADMIN_ACCOUNTS { get; set; }
+        public virtual DbSet<BOOK> BOOKS { get; set; }
         public virtual DbSet<INVOICE_DETAILS> INVOICE_DETAILS { get; set; }
-        public virtual DbSet<USER_ACCOUNT> USER_ACCOUNT { get; set; }
+        public virtual DbSet<USER_ACCOUNT> USER_ACCOUNTS { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

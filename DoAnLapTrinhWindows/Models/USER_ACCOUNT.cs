@@ -1,4 +1,4 @@
-namespace DoAnLapTrinhWindows.Modifile
+namespace DoAnLapTrinhWindows.Models
 {
     using System;
     using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace DoAnLapTrinhWindows.Modifile
         [StringLength(20)]
         public string USERNAME { get; set; }
 
-        [StringLength(100)]
+        [StringLength(20)]
         public string PASSWORD1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

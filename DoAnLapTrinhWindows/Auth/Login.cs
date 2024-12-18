@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoAnLapTrinhWindows.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +9,6 @@ using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DoAnLapTrinhWindows.Modifile;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
@@ -28,21 +28,30 @@ namespace DoAnLapTrinhWindows
             {
                 string UserName = txt_userName.Text.Trim();
                 string Password = txt_password.Text.Trim();
-                var user = context.USER_ACCOUNT
-                        .FirstOrDefault(u => u.USERNAME == UserName && u.PASSWORD1 == Password);
-                var admin = context.ADMIN_ACCOUNT
-                        .FirstOrDefault(u => u.ADMINNAME == UserName && u.PASSWORD1 == Password);
-                if (user != null)
-                {
-                    MessageBox.Show("Đăng nhập thành công");
-                }
+                bool verifyPassword = false;
+                var user = context.USER_ACCOUNTS
+                        .FirstOrDefault(u => u.USERNAME == UserName);
+                var admin = context.ADMIN_ACCOUNTS
+                        .FirstOrDefault(u => u.ADMINNAME == UserName);
+                
+                if(user != null)
+                    verifyPassword = BCrypt.Net.BCrypt.Verify(Password, user.PASSWORD1);       
                 else if(admin != null)
+                    verifyPassword = BCrypt.Net.BCrypt.Verify(Password, admin.PASSWORD1);
+
+                if ((user != null || admin != null) && verifyPassword)
                 {
                     MessageBox.Show("Đăng nhập thành công");
+                    if (admin != null)
+                    {
+                        AdminForm adminForm = new AdminForm(admin);
+                        adminForm.ShowDialog();
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Đăng nhập thất bại");
+                    MessageBox.Show(Password + "\n" + admin.PASSWORD1 + "\n" + verifyPassword.ToString());
                 }
             }
             catch (Exception ex) 

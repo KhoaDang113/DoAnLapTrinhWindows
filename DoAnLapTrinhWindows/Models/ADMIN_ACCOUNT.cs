@@ -1,4 +1,4 @@
-namespace DoAnLapTrinhWindows.Modifile
+namespace DoAnLapTrinhWindows.Models
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace DoAnLapTrinhWindows.Modifile
         [StringLength(20)]
         public string ADMINNAME { get; set; }
 
-        [StringLength(20)]
+        [StringLength(200)]
         public string PASSWORD1 { get; set; }
 
         public bool? EDIT { get; set; }

@@ -1,4 +1,4 @@
-namespace DoAnLapTrinhWindows.Modifile
+namespace DoAnLapTrinhWindows.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,9 +18,11 @@ namespace DoAnLapTrinhWindows.Modifile
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_USER { get; set; }
 
-        public DateTime? BORROW_DATE { get; set; }
+        public DateTime? BUY_DATE { get; set; }
 
-        public DateTime? DUE_DATE { get; set; }
+        public int? TOTAL { get; set; }
+
+        public int? BUY_QUANTITY { get; set; }
 
         public virtual BOOK BOOK { get; set; }
 

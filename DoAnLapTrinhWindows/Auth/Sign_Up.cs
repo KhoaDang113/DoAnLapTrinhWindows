@@ -1,4 +1,4 @@
-﻿using DoAnLapTrinhWindows.Modifile;
+﻿using DoAnLapTrinhWindows.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,21 +29,22 @@ namespace DoAnLapTrinhWindows
                 string userName = txt_userName.Text.Trim();
                 string password = txt_password.Text.Trim();
                 string confirmPassword = txt_ConfirmPass.Text.Trim();
-                var user = context.USER_ACCOUNT
-                        .FirstOrDefault(u => u.USERNAME == userName && u.PASSWORD1 == password);
+                var user = context.USER_ACCOUNTS
+                        .FirstOrDefault(u => u.USERNAME == userName);
                 if (user == null) 
                 {
                     if (confirmPassword == password) 
                     {
-                        MessageBox.Show("Đăng ký thành công");
                         USER_ACCOUNT uSER_ACCOUNT = new USER_ACCOUNT()
                         {
-                            ID_USER = context.USER_ACCOUNT.ToList().Count,
+                            ID_USER = context.USER_ACCOUNTS.ToList().Count,
                             USERNAME = userName,
                             PASSWORD1 = BCrypt.Net.BCrypt.EnhancedHashPassword(password,4),
                         };
-                        context.USER_ACCOUNT.Add(uSER_ACCOUNT);
+                        context.USER_ACCOUNTS.Add(uSER_ACCOUNT);
                         context.SaveChanges();
+                        MessageBox.Show("Đăng ký thành công");
+                        this.Close();
                     }
                     else
                     {
@@ -52,13 +53,18 @@ namespace DoAnLapTrinhWindows
                 }
                 else
                 {
-                    MessageBox.Show("Đăng ký thất bại");
+                    MessageBox.Show("Đăng ký thất bại tên người dùng không được trùnng nhau");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btn_login_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
