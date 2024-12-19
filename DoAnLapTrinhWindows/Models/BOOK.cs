@@ -28,6 +28,8 @@ namespace DoAnLapTrinhWindows.Models
         [StringLength(100)]
         public string AUTHOR { get; set; }
 
+        public int? PRICE { get; set; }
+
         public int? QUANTITY { get; set; }
 
         [StringLength(200)]

@@ -44,7 +44,7 @@ namespace DoAnLapTrinhWindows
                     MessageBox.Show("Đăng nhập thành công");
                     if (admin != null)
                     {
-                        AdminForm adminForm = new AdminForm(admin);
+                        AdminForm adminForm = new AdminForm(admin, context);
                         adminForm.ShowDialog();
                     }
                 }

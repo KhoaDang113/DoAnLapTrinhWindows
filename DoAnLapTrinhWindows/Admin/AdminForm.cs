@@ -1,4 +1,5 @@
-﻿using DoAnLapTrinhWindows.Models;
+﻿using DoAnLapTrinhWindows.Admin;
+using DoAnLapTrinhWindows.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,14 +16,49 @@ namespace DoAnLapTrinhWindows
     public partial class AdminForm : Form
     {
         ADMIN_ACCOUNT admin;
-        DBModels context = new DBModels();
+        DBModels context;
         string selectedButton = "Books";
         
 
-        public AdminForm(ADMIN_ACCOUNT admin)
+        public AdminForm(ADMIN_ACCOUNT admin, DBModels context)
         {
             this.admin = admin;
+            this.context = context;
             InitializeComponent();
+        }
+
+        private Dictionary<int, int> CalculateTotalOfEachMonth()
+        {
+            Dictionary<int, int> total = new Dictionary<int, int>();
+            for(int i = 1; i <= 12; i++) {
+                int monthTotal = 0;
+                foreach(var invoice in context.INVOICE_DETAILS)
+                {
+                    if(invoice != null && invoice.BUY_DATE.Value.Month == i)
+                    {
+                        monthTotal += invoice.TOTAL.Value;
+                    }   
+                }
+                total.Add(i, monthTotal);
+            }
+            return total;
+        }
+
+        private void DrawDataChart()
+        {
+            Dictionary<int, int> total = CalculateTotalOfEachMonth();
+            if (dataChart.Series.FindByName("Total") == null)
+            {
+                dataChart.Series.Add("Total");
+                dataChart.Series["Total"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            }
+            else
+                this.dataChart.Series["Total"].Points.Clear();
+            this.dataChart.Series["Total"].Points.Clear();
+            foreach (var item in total)
+            {
+                this.dataChart.Series["Total"].Points.AddXY(item.Key, item.Value);
+            }
         }
 
         private void CreateBookView()
@@ -95,6 +131,7 @@ namespace DoAnLapTrinhWindows
         private void AdminForm_Load(object sender, EventArgs e)
         {
             this.CreateBookView();
+            this.toolStriplblUserName.Text = "Current user: " + admin.ADMINNAME;
             SetlblTimKiem("Books");
         }
 
@@ -109,7 +146,7 @@ namespace DoAnLapTrinhWindows
             {
                 ToolStripButton button = sender as ToolStripButton;
                 string buttonText = button.Text.Trim();
-
+                this.dataChart.Visible = false;
                 if (buttonText.Equals("Books"))
                 {
                     SetlblTimKiem(buttonText.ToLower());
@@ -122,6 +159,7 @@ namespace DoAnLapTrinhWindows
                     this.CreateInvoiceView();
                     selectedButton = "Invoices";
                 }
+                this.txtTimKiem.Clear();
             }
             catch(Exception ex)
             {
@@ -149,5 +187,31 @@ namespace DoAnLapTrinhWindows
             }
         }
 
+        private void ToolStripMenuAddBook_Click(object sender, EventArgs e)
+        {
+            AddBookForm addBookForm = new AddBookForm(admin, context);
+            addBookForm.ShowDialog();
+        }
+
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            dgv.EndEdit();
+            string search = this.txtTimKiem.Text.ToLower();
+            foreach(DataGridViewRow row in this.dgv.Rows)
+            {
+                if (row.IsNewRow)
+                    continue;
+                if (row.Cells[1].Value.ToString().ToLower().Contains(search))
+                    row.Visible = true;
+                else
+                    row.Visible = false;
+            }
+        }
+
+        private void toolStripButtonAnalyze_Click(object sender, EventArgs e)
+        {
+            this.dataChart.Visible = true;
+            this.DrawDataChart();
+        }
     }
 }
