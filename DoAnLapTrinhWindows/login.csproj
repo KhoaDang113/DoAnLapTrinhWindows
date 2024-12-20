@@ -103,6 +103,18 @@
     <Compile Include="Auth\Sign_Up.Designer.cs">
       <DependentUpon>Sign_Up.cs</DependentUpon>
     </Compile>
+    <Compile Include="User\BookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\BookForm.Designer.cs">
+      <DependentUpon>BookForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\DetailedBookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\DetailedBookForm.Designer.cs">
+      <DependentUpon>DetailedBookForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Admin\AddRemoveBookForm.resx">
       <DependentUpon>AddRemoveBookForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +135,12 @@
     </Compile>
     <EmbeddedResource Include="Auth\Sign_Up.resx">
       <DependentUpon>Sign_Up.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\BookForm.resx">
+      <DependentUpon>BookForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\DetailedBookForm.resx">
+      <DependentUpon>DetailedBookForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
