@@ -1,6 +1,6 @@
 ﻿namespace DoAnLapTrinhWindows.Admin
 {
-    partial class AddBookForm
+    partial class AddRemoveBookForm
     {
         /// <summary>
         /// Required designer variable.
@@ -45,6 +45,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripCurrentUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnAddBook = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBookImage)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -160,7 +161,6 @@
             this.btnAddImage.Size = new System.Drawing.Size(75, 23);
             this.btnAddImage.TabIndex = 13;
             this.btnAddImage.Text = "Add Image";
-            this.btnAddImage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddImage.UseVisualStyleBackColor = true;
             this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
@@ -187,15 +187,25 @@
             this.btnAddBook.Size = new System.Drawing.Size(75, 23);
             this.btnAddBook.TabIndex = 15;
             this.btnAddBook.Text = "Add Book";
-            this.btnAddBook.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddBook.UseVisualStyleBackColor = true;
             this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
             // 
-            // AddBookForm
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(266, 337);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Remove Book";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnRemoveBook_Click);
+            // 
+            // AddRemoveBookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnAddBook);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnAddImage);
@@ -212,7 +222,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBookName);
             this.Controls.Add(this.lblBookName);
-            this.Name = "AddBookForm";
+            this.Name = "AddRemoveBookForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.AddBookForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBookImage)).EndInit();
@@ -242,5 +252,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripCurrentUser;
         private System.Windows.Forms.Button btnAddBook;
+        private System.Windows.Forms.Button button1;
     }
 }

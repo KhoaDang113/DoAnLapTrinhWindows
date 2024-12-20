@@ -12,14 +12,14 @@ using System.Windows.Forms;
 
 namespace DoAnLapTrinhWindows.Admin
 {
-    public partial class AddBookForm : Form
+    public partial class AddRemoveBookForm : Form
     {
         DBModels context;
         ADMIN_ACCOUNT admin;
 
         private string imageFilePath;
 
-        public AddBookForm(ADMIN_ACCOUNT admin, DBModels context)
+        public AddRemoveBookForm(ADMIN_ACCOUNT admin, DBModels context)
         {
             InitializeComponent();
             this.admin = admin;
@@ -141,6 +141,29 @@ namespace DoAnLapTrinhWindows.Admin
                     this.Clear();
                 }
             }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        void btnRemoveBook_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var find = context.BOOKS.FirstOrDefault(book => book.NAME_BOOK == this.txtBookName.Text);
+                if (find == null)
+                {
+                    MessageBox.Show("Book doesn't exist");
+                    return;
+                }
+                else
+                {
+                    context.BOOKS.Remove(find);
+                    context.SaveChangesAsync();
+                    MessageBox.Show("Book successfully removed");
+                    this.Clear();
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

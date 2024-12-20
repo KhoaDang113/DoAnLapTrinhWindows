@@ -27,6 +27,13 @@ namespace DoAnLapTrinhWindows
             InitializeComponent();
         }
 
+        //DATA CHART
+        private void SetChartVisible() {
+            this.dataChart.Visible = !this.dataChart.Visible;
+            this.dataPieChart.Visible = !this.dataPieChart.Visible;
+            this.lblYear.Visible = !this.lblYear.Visible;
+        }
+
         private Dictionary<int, int> CalculateTotalOfEachMonth()
         {
             Dictionary<int, int> total = new Dictionary<int, int>();
@@ -34,8 +41,9 @@ namespace DoAnLapTrinhWindows
                 int monthTotal = 0;
                 foreach(var invoice in context.INVOICE_DETAILS)
                 {
-                    if(invoice != null && invoice.BUY_DATE.Value.Month == i)
+                    if(invoice != null && invoice.BUY_DATE.Value.Month == i && invoice.BUY_DATE.Value.Year == DateTime.Today.Year)
                     {
+                        
                         monthTotal += invoice.TOTAL.Value;
                     }   
                 }
@@ -53,14 +61,60 @@ namespace DoAnLapTrinhWindows
                 dataChart.Series["Total"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             }
             else
+            {
                 this.dataChart.Series["Total"].Points.Clear();
-            this.dataChart.Series["Total"].Points.Clear();
+            }
+
             foreach (var item in total)
             {
-                this.dataChart.Series["Total"].Points.AddXY(item.Key, item.Value);
+                int pointIndex = this.dataChart.Series["Total"].Points.AddXY(item.Key, item.Value);
+                this.dataChart.Series["Total"].Points[pointIndex].ToolTip = $"Month: {item.Key}, Total: {item.Value}";
             }
         }
+        
+        private void DrawDataPieChart()
+        {
+            Dictionary<int, int> total = CalculateTotalOfEachMonth();
+            Dictionary<int, string> monthNames = new Dictionary<int, string>
+            {
+                { 1, "January" },
+                { 2, "February" },
+                { 3, "March" },
+                { 4, "April" },
+                { 5, "May" },
+                { 6, "June" },
+                { 7, "July" },
+                { 8, "August" },
+                { 9, "September" },
+                { 10, "October" },
+                { 11, "November" },
+                { 12, "December" }
+            };
+            int yearTotal = 0;
+            foreach(var t in total)
+            {
+                yearTotal +=  t.Value;
+            }
+            if (dataPieChart.Series.FindByName("Total") == null)
+            {
+                dataPieChart.Series.Add("Total");
+                dataPieChart.Series["Total"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            }
+            else
+                this.dataPieChart.Series["Total"].Points.Clear();
+            foreach (var item in total)
+            {
+                string monthName = monthNames[item.Key];
+                if (item.Value != 0)
+                {
+                    int pointIndex = this.dataPieChart.Series["Total"].Points.AddXY(monthName, item.Value);
+                    this.dataPieChart.Series["Total"].Points[pointIndex].ToolTip = $"Month: {monthName}, Total: {item.Value}";
+                }
+            }
+            this.lblYear.Text +=  yearTotal.ToString();
+        }
 
+        // CREATE VIEW
         private void CreateBookView()
         {
             this.dgv.Columns.Clear();
@@ -121,13 +175,15 @@ namespace DoAnLapTrinhWindows
             return false;
         }
 
-
+        // SEARCH
         private void SetlblTimKiem(string text)
         {
             this.lblTimKiem.Text = "Find";
             this.lblTimKiem.Text +=  " " + text;
         }
 
+
+        // FORM EVENTS
         private void AdminForm_Load(object sender, EventArgs e)
         {
             this.CreateBookView();
@@ -144,9 +200,11 @@ namespace DoAnLapTrinhWindows
         {
             try
             {
+                // Change view
                 ToolStripButton button = sender as ToolStripButton;
                 string buttonText = button.Text.Trim();
-                this.dataChart.Visible = false;
+                if (this.dataChart.Visible)
+                    this.SetChartVisible();
                 if (buttonText.Equals("Books"))
                 {
                     SetlblTimKiem(buttonText.ToLower());
@@ -160,8 +218,24 @@ namespace DoAnLapTrinhWindows
                     selectedButton = "Invoices";
                 }
                 this.txtTimKiem.Clear();
+
+                //Sort
+                if (button.Text.Equals("sortDesc"))
+                {
+                    if (selectedButton.Equals("Books"))
+                        this.dgv.Sort(this.dgv.Columns["QUANTITY"], ListSortDirection.Descending);
+                    else if (selectedButton.Equals("Invoices"))
+                        this.dgv.Sort(this.dgv.Columns["TOTAL"], ListSortDirection.Descending);
+                }
+                else if (button.Text.Equals("sortAsc"))
+                {
+                    if (selectedButton.Equals("Books"))
+                        this.dgv.Sort(this.dgv.Columns["QUANTITY"], ListSortDirection.Ascending);
+                    else if (selectedButton.Equals("Invoices"))
+                        this.dgv.Sort(this.dgv.Columns["TOTAL"], ListSortDirection.Ascending);
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -189,7 +263,7 @@ namespace DoAnLapTrinhWindows
 
         private void ToolStripMenuAddBook_Click(object sender, EventArgs e)
         {
-            AddBookForm addBookForm = new AddBookForm(admin, context);
+            AddRemoveBookForm addBookForm = new AddRemoveBookForm(admin, context);
             addBookForm.ShowDialog();
         }
 
@@ -210,8 +284,9 @@ namespace DoAnLapTrinhWindows
 
         private void toolStripButtonAnalyze_Click(object sender, EventArgs e)
         {
-            this.dataChart.Visible = true;
+            this.SetChartVisible();
             this.DrawDataChart();
+            this.DrawDataPieChart();
         }
     }
 }
