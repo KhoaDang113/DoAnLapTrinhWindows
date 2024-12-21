@@ -136,7 +136,7 @@ namespace DoAnLapTrinhWindows.Admin
                         LINK_IMG = imageLink
                     };
                     context.BOOKS.Add(book);
-                    context.SaveChangesAsync();
+                    context.SaveChanges();
                     MessageBox.Show("Book successfully added");
                     this.Clear();
                 }

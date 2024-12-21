@@ -130,7 +130,7 @@ namespace DoAnLapTrinhWindows
 
             foreach(var Book in context.BOOKS)
             {
-                this.dgv.Rows.Add(Book.ID_BOOK, Book.NAME_BOOK, Book.AUTHOR, 0, Book.CATEGORY, Book.QUANTITY);
+                this.dgv.Rows.Add(Book.ID_BOOK, Book.NAME_BOOK, Book.AUTHOR, Book.PRICE, Book.CATEGORY, Book.QUANTITY);
             }
         }
 
