@@ -63,7 +63,7 @@ namespace DoAnLapTrinhWindows.User
         private void LoadBook()
         {
             var book = context.BOOKS.FirstOrDefault(b => b.NAME_BOOK == "Design Patterns: Elements of Reusable Object-Oriented Software");
-            if (book != null)
+            if(book != null)
             {
                 this.LoadImage(book);
                 var bookName = book.NAME_BOOK.Split();
@@ -91,7 +91,7 @@ namespace DoAnLapTrinhWindows.User
 
                 this.lblAuthor.Text = book.AUTHOR;
                 this.lblCategory.Text = book.CATEGORY;
-                if (book.QUANTITY > 0)
+                if(book.QUANTITY > 0)
                 {
                     this.lblStatus.Text = "In stock: " + book.QUANTITY;
                     this.lblStatus.ForeColor = Color.Green;

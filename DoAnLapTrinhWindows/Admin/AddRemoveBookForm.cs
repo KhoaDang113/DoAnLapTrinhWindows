@@ -87,12 +87,12 @@ namespace DoAnLapTrinhWindows.Admin
 
         private void AddBookForm_Load(object sender, EventArgs e)
         {
-            this.toolStripCurrentUser.Text  = "current user: " + admin.ADMINNAME;
+            this.toolStripCurrentUser.Text = "current user: " + admin.ADMINNAME;
         }
 
         private void btnAddImage_Click(object sender, EventArgs e)
         {
-            OpenFileDialog  openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -136,11 +136,12 @@ namespace DoAnLapTrinhWindows.Admin
                         LINK_IMG = imageLink
                     };
                     context.BOOKS.Add(book);
-                    context.SaveChangesAsync();
+                    context.SaveChanges();
                     MessageBox.Show("Book successfully added");
                     this.Clear();
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -158,7 +159,7 @@ namespace DoAnLapTrinhWindows.Admin
                 else
                 {
                     context.BOOKS.Remove(find);
-                    context.SaveChangesAsync();
+                    context.SaveChanges();
                     MessageBox.Show("Book successfully removed");
                     this.Clear();
                 }

@@ -1,4 +1,5 @@
-﻿using DoAnLapTrinhWindows.Admin;
+﻿
+using DoAnLapTrinhWindows.Admin;
 using DoAnLapTrinhWindows.Models;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace DoAnLapTrinhWindows
         ADMIN_ACCOUNT admin;
         DBModels context;
         string selectedButton = "Books";
-        
+
 
         public AdminForm(ADMIN_ACCOUNT admin, DBModels context)
         {
@@ -28,7 +29,8 @@ namespace DoAnLapTrinhWindows
         }
 
         //DATA CHART
-        private void SetChartVisible() {
+        private void SetChartVisible()
+        {
             this.dataChart.Visible = !this.dataChart.Visible;
             this.dataPieChart.Visible = !this.dataPieChart.Visible;
             this.lblYear.Visible = !this.lblYear.Visible;
@@ -37,15 +39,16 @@ namespace DoAnLapTrinhWindows
         private Dictionary<int, int> CalculateTotalOfEachMonth()
         {
             Dictionary<int, int> total = new Dictionary<int, int>();
-            for(int i = 1; i <= 12; i++) {
+            for (int i = 1; i <= 12; i++)
+            {
                 int monthTotal = 0;
-                foreach(var invoice in context.INVOICE_DETAILS)
+                foreach (var invoice in context.INVOICE_DETAILS)
                 {
-                    if(invoice != null && invoice.BUY_DATE.Value.Month == i && invoice.BUY_DATE.Value.Year == DateTime.Today.Year)
+                    if (invoice != null && invoice.BUY_DATE.Value.Month == i && invoice.BUY_DATE.Value.Year == DateTime.Today.Year)
                     {
-                        
+
                         monthTotal += invoice.TOTAL.Value;
-                    }   
+                    }
                 }
                 total.Add(i, monthTotal);
             }
@@ -71,7 +74,7 @@ namespace DoAnLapTrinhWindows
                 this.dataChart.Series["Total"].Points[pointIndex].ToolTip = $"Month: {item.Key}, Total: {item.Value}";
             }
         }
-        
+
         private void DrawDataPieChart()
         {
             Dictionary<int, int> total = CalculateTotalOfEachMonth();
@@ -91,9 +94,9 @@ namespace DoAnLapTrinhWindows
                 { 12, "December" }
             };
             int yearTotal = 0;
-            foreach(var t in total)
+            foreach (var t in total)
             {
-                yearTotal +=  t.Value;
+                yearTotal += t.Value;
             }
             if (dataPieChart.Series.FindByName("Total") == null)
             {
@@ -111,7 +114,7 @@ namespace DoAnLapTrinhWindows
                     this.dataPieChart.Series["Total"].Points[pointIndex].ToolTip = $"Month: {monthName}, Total: {item.Value}";
                 }
             }
-            this.lblYear.Text +=  yearTotal.ToString();
+            this.lblYear.Text += yearTotal.ToString();
         }
 
         // CREATE VIEW
@@ -128,9 +131,9 @@ namespace DoAnLapTrinhWindows
             this.dgv.Columns.Add("CATEGORY", "Thể loại");
             this.dgv.Columns.Add("QUANTITY", "Số lượng");
 
-            foreach(var Book in context.BOOKS)
+            foreach (var Book in context.BOOKS)
             {
-                this.dgv.Rows.Add(Book.ID_BOOK, Book.NAME_BOOK, Book.AUTHOR, 0, Book.CATEGORY, Book.QUANTITY);
+                this.dgv.Rows.Add(Book.ID_BOOK, Book.NAME_BOOK, Book.AUTHOR, Book.PRICE, Book.CATEGORY, Book.QUANTITY);
             }
         }
 
@@ -150,7 +153,7 @@ namespace DoAnLapTrinhWindows
 
             foreach (var user in context.USER_ACCOUNTS)
                 userDictionary.Add(user.ID_USER, user.USERNAME);
-            foreach(var book in context.BOOKS)
+            foreach (var book in context.BOOKS)
                 bookDictionary.Add(book.ID_BOOK, book.NAME_BOOK);
 
             foreach (var invoice in context.INVOICE_DETAILS)
@@ -168,7 +171,7 @@ namespace DoAnLapTrinhWindows
                 book.AUTHOR = row.Cells["AUTHOR"].Value.ToString();
                 book.CATEGORY = row.Cells["CATEGORY"].Value.ToString();
                 book.QUANTITY = int.Parse(row.Cells["QUANTITY"].Value.ToString());
-                
+
                 context.SaveChanges();
                 return true;
             }
@@ -179,7 +182,7 @@ namespace DoAnLapTrinhWindows
         private void SetlblTimKiem(string text)
         {
             this.lblTimKiem.Text = "Find";
-            this.lblTimKiem.Text +=  " " + text;
+            this.lblTimKiem.Text += " " + text;
         }
 
 
@@ -240,7 +243,7 @@ namespace DoAnLapTrinhWindows
                 MessageBox.Show(ex.Message);
             }
         }
-       
+
         private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -255,7 +258,7 @@ namespace DoAnLapTrinhWindows
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -271,7 +274,7 @@ namespace DoAnLapTrinhWindows
         {
             dgv.EndEdit();
             string search = this.txtTimKiem.Text.ToLower();
-            foreach(DataGridViewRow row in this.dgv.Rows)
+            foreach (DataGridViewRow row in this.dgv.Rows)
             {
                 if (row.IsNewRow)
                     continue;

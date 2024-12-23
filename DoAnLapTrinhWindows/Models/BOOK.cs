@@ -32,7 +32,7 @@ namespace DoAnLapTrinhWindows.Models
 
         public int? QUANTITY { get; set; }
 
-        [StringLength(200)]
+        [StringLength(300)]
         public string LINK_IMG { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
