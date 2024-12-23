@@ -36,11 +36,11 @@ namespace DoAnLapTrinhWindows
                 var admin = context.ADMIN_ACCOUNTS
                         .FirstOrDefault(u => u.ADMINNAME == UserName);
 
-                //if (user != null)
-                //    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, user.PASSWORD1);
-                //else if (admin != null)
-                //    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, admin.PASSWORD1);
-                if ((user != null || admin != null) )
+                if (user != null)
+                    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, user.PASSWORD1);
+                else if (admin != null)
+                    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, admin.PASSWORD1);
+                if ((user != null || admin != null) && verifyPassword)
                 {
                     MessageBox.Show("Đăng nhập thành công");
                     if (user != null)
