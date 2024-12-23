@@ -23,19 +23,9 @@ namespace DoAnLapTrinhWindows.Models
                 .Property(e => e.PASSWORD1)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<BOOK>()
-                .HasMany(e => e.INVOICE_DETAILS)
-                .WithRequired(e => e.BOOK)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<USER_ACCOUNT>()
                 .Property(e => e.PASSWORD1)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<USER_ACCOUNT>()
-                .HasMany(e => e.INVOICE_DETAILS)
-                .WithRequired(e => e.USER_ACCOUNT)
-                .WillCascadeOnDelete(false);
         }
     }
 }

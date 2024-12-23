@@ -17,8 +17,8 @@ namespace DoAnLapTrinhWindows
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Login());
-            Application.Run(new DetailedBookForm());
+            //Application.Run(new InvoiceDetail());
+            Application.Run(new Login());
         }
     }
 }

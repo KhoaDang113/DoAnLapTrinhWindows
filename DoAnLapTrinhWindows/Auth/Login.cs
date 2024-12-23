@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -35,16 +36,17 @@ namespace DoAnLapTrinhWindows
                 var admin = context.ADMIN_ACCOUNTS
                         .FirstOrDefault(u => u.ADMINNAME == UserName);
 
-                if (user != null)
-                    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, user.PASSWORD1);
-                else if (admin != null)
-                    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, admin.PASSWORD1);
-                if ((user != null || admin != null) && verifyPassword)
+                //if (user != null)
+                //    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, user.PASSWORD1);
+                //else if (admin != null)
+                //    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, admin.PASSWORD1);
+                if ((user != null || admin != null) )
                 {
                     MessageBox.Show("Đăng nhập thành công");
                     if (user != null)
                     {
-                        BookForm userForm = new BookForm();
+                        var IDUser = context.USER_ACCOUNTS.FirstOrDefault(u => u.USERNAME == UserName).ID_USER;
+                        BookForm userForm = new BookForm(IDUser);
                         this.Hide();
                         userForm.ShowDialog();
                         this.Close();

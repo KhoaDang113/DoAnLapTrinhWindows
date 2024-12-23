@@ -109,6 +109,12 @@
     <Compile Include="Auth\Sign_Up.Designer.cs">
       <DependentUpon>Sign_Up.cs</DependentUpon>
     </Compile>
+    <Compile Include="User\InvoiceDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\InvoiceDetail.Designer.cs">
+      <DependentUpon>InvoiceDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="User\QuantityBook.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +160,9 @@
     <EmbeddedResource Include="Auth\Sign_Up.resx">
       <DependentUpon>Sign_Up.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User\InvoiceDetail.resx">
+      <DependentUpon>InvoiceDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User\QuantityBook.resx">
       <DependentUpon>QuantityBook.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,5 +192,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

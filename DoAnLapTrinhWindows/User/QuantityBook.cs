@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,16 +18,19 @@ namespace DoAnLapTrinhWindows.User
         DBModels contextDB = new DBModels();
         private int price;
         private int idBook1;
+        private int idUser1;
+
         public QuantityBook()
         {
             InitializeComponent();
             
         }
-        public QuantityBook(string NameBook, Image ImageBook, int Price, int IDBook)
+        public QuantityBook(string NameBook, Image ImageBook, int Price, int IDBook, int IDUser)
         {
             InitializeComponent();
             price = Price;
             idBook1 = IDBook;
+            idUser1 = IDUser;
             LoadBuyBook(NameBook,ImageBook);
         }
         public void LoadBuyBook(string NameBook, Image ImageBook)
@@ -98,35 +102,45 @@ namespace DoAnLapTrinhWindows.User
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            try
+            using (var transaction = contextDB.Database.BeginTransaction())
             {
-                var book = contextDB.BOOKS.FirstOrDefault(b => b.ID_BOOK == idBook1);
-                if (book != null)
+                try
                 {
-                    int quantity = int.Parse(book.QUANTITY.ToString());
-                    int quantityBuy = int.Parse(txtQuantity.Text);
-
-                    if (quantity < quantityBuy)
+                    var book = contextDB.BOOKS.FirstOrDefault(b => b.ID_BOOK == idBook1);
+                    if (book != null)
                     {
-                        MessageBox.Show($"Số lượng tồn chỉ còn: {quantity}");
+                        int quantity = int.Parse(book.QUANTITY.ToString());
+                        int quantityBuy = int.Parse(txtQuantity.Text);
 
+                        if (quantity < quantityBuy)
+                        {
+                            MessageBox.Show($"Số lượng tồn chỉ còn: {quantity}");
+
+                        }
+                        else
+                        {
+                            book.QUANTITY = quantity - quantityBuy;
+                            string toltalPrice = txtTotalPrice.Text;
+                            InvoiceDetail bookBook = new InvoiceDetail(idBook1, quantityBuy, toltalPrice, idUser1);
+                            this.Hide();
+                            bookBook.ShowDialog();
+                            this.Close();
+                            transaction.Commit();
+                            //MessageBox.Show($"Đã mua thành công");
+                        }
                     }
                     else
                     {
-                        book.QUANTITY = quantity - quantityBuy;
-                        contextDB.SaveChanges();
-                        MessageBox.Show($"Đã mua thành công");
-
+                        MessageBox.Show("Không tìm thấy sách trong cơ sở dữ liệu.");
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Không tìm thấy sách trong cơ sở dữ liệu.");
-                }
 
-            }
-            catch(Exception ex) {
-                MessageBox.Show(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
             }
         }
     }

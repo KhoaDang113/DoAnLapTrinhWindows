@@ -20,6 +20,7 @@ namespace DoAnLapTrinhWindows.User
             InitializeComponent();
         }
         public int idBook;
+        public int idUser;
         public string Title
         {
             get => lblNameBook.Text;
@@ -64,7 +65,7 @@ namespace DoAnLapTrinhWindows.User
             string labelText = lblPriceBook.Text;
             int price = int.Parse(labelText.Replace("$", "").Replace(" ", "").Replace("đ", "").Replace(",", "").Trim());
             int idBook1 =  idBook;
-            QuantityBook quantityBook = new QuantityBook(nameBook, imageBook, price, idBook1);
+            QuantityBook quantityBook = new QuantityBook(nameBook, imageBook, price, idBook1, idUser);
             quantityBook.ShowDialog();
         }
 

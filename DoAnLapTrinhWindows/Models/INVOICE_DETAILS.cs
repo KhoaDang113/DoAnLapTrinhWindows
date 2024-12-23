@@ -9,13 +9,11 @@ namespace DoAnLapTrinhWindows.Models
     public partial class INVOICE_DETAILS
     {
         [Key]
-        [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID_INVOICE_DETAILS { get; set; }
+
         public int ID_BOOK { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_USER { get; set; }
 
         public DateTime? BUY_DATE { get; set; }

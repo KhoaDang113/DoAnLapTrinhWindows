@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.IO;
@@ -18,13 +19,21 @@ namespace DoAnLapTrinhWindows.User
         private int currentPage = 1; 
         private int itemsPerPage = 10;
         private int totalPages = 1;
+        private int idUser1;
+
+        public BookForm(int IDUser)
+        {
+            idUser1 = IDUser;
+            InitializeComponent();
+            CalculateTotalPages();
+            LoadBooks(currentPage);
+        }
         public BookForm()
         {
             InitializeComponent();
             CalculateTotalPages();
             LoadBooks(currentPage);
         }
-
         private void CalculateTotalPages()
         {
             using (DBModels context = new DBModels())
@@ -54,6 +63,7 @@ namespace DoAnLapTrinhWindows.User
                         Title = book.NAME_BOOK,
                         Price = int.Parse(book.PRICE.ToString()),
                         idBook = book.ID_BOOK,
+                        idUser = idUser1,
                     };
                     bookItem.LoadImageFromUrl(book.LINK_IMG);
 
