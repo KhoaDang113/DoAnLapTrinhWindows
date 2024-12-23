@@ -1,4 +1,5 @@
 ﻿using DoAnLapTrinhWindows.Models;
+using DoAnLapTrinhWindows.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,21 +28,27 @@ namespace DoAnLapTrinhWindows
             try
             {
                 string UserName = txt_userName.Text.Trim();
-                string Password = txt_password.Text.Trim();
+                string PassWord = txt_password.Text.Trim();
                 bool verifyPassword = false;
                 var user = context.USER_ACCOUNTS
                         .FirstOrDefault(u => u.USERNAME == UserName);
                 var admin = context.ADMIN_ACCOUNTS
                         .FirstOrDefault(u => u.ADMINNAME == UserName);
-                
-                if(user != null)
-                    verifyPassword = BCrypt.Net.BCrypt.Verify(Password, user.PASSWORD1);       
-                else if(admin != null)
-                    verifyPassword = BCrypt.Net.BCrypt.Verify(Password, admin.PASSWORD1);
 
+                if (user != null)
+                    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, user.PASSWORD1);
+                else if (admin != null)
+                    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, admin.PASSWORD1);
                 if ((user != null || admin != null) && verifyPassword)
                 {
                     MessageBox.Show("Đăng nhập thành công");
+                    if (user != null)
+                    {
+                        BookForm userForm = new BookForm();
+                        this.Hide();
+                        userForm.ShowDialog();
+                        this.Close();
+                    }
                     if (admin != null)
                     {
                         AdminForm adminForm = new AdminForm(admin, context);
@@ -51,7 +58,7 @@ namespace DoAnLapTrinhWindows
                 else
                 {
                     MessageBox.Show("Đăng nhập thất bại");
-                    MessageBox.Show(Password + "\n" + admin.PASSWORD1 + "\n" + verifyPassword.ToString());
+                    MessageBox.Show(PassWord + "\n" + admin.PASSWORD1 + "\n" + verifyPassword.ToString());
                 }
             }
             catch (Exception ex) 

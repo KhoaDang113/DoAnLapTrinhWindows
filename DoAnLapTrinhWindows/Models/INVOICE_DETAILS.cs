@@ -20,9 +20,9 @@ namespace DoAnLapTrinhWindows.Models
 
         public DateTime? BUY_DATE { get; set; }
 
-        public int? TOTAL { get; set; }
-
         public int? BUY_QUANTITY { get; set; }
+
+        public int? TOTAL { get; set; }
 
         public virtual BOOK BOOK { get; set; }
 
