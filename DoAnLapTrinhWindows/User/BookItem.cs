@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoAnLapTrinhWindows.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,12 +51,12 @@ namespace DoAnLapTrinhWindows.User
                 }
                 else
                 {
-                    ptbImgBook.Image = Image.FromFile(@"D:\C#\DoAnLapTrinhWindows\Image\no-image.png");
+                    ptbImgBook.Image = Image.FromFile(@"E:\Code\DoAnLapTrinhWindows\Image\no-image.png");
                 }
             }
             catch
             {
-                ptbImgBook.Image = Image.FromFile(@"D:\C#\DoAnLapTrinhWindows\Image\no-image.png");
+                ptbImgBook.Image = Image.FromFile(@"E:\Code\DoAnLapTrinhWindows\Image\no-image.png");
             }
         }
         private void guna2Button1_Click(object sender, EventArgs e)
@@ -72,8 +73,21 @@ namespace DoAnLapTrinhWindows.User
 
         private void ptbImgBook_Click(object sender, EventArgs e)
         {
-            DetailedBookForm detailedBookForm = new DetailedBookForm();
-            detailedBookForm.ShowDialog();
+            using (DBModels context = new DBModels())
+            {
+                var selectedBook = context.BOOKS.FirstOrDefault(b => b.ID_BOOK == idBook);
+                var user = context.USER_ACCOUNTS.FirstOrDefault(u => u.ID_USER == idUser);
+
+                if (selectedBook != null && user != null)
+                {
+                    DetailedBookForm detailedBookForm = new DetailedBookForm(selectedBook, user);
+                    detailedBookForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Book or user information could not be loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

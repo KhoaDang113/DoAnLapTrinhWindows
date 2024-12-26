@@ -84,13 +84,13 @@ namespace DoAnLapTrinhWindows.User
                     txtTotalPrice.Text = "0,000";
                     return;
                 }
-                int value = int.Parse(txtQuantity.Text.ToString());
+                int value;
                 if (!int.TryParse(txtQuantity.Text, out value) || value <= 0)
                 {
                     MessageBox.Show("Vui lòng nhập giá trị lớn hơn 0", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtQuantity.Text = "1";
                 }
-                this.txtTotalPrice.Text = $" {(price * int.Parse(txtQuantity.Text.ToString())):C0} đ";
+                this.txtTotalPrice.Text = $" {(price * int.Parse(txtQuantity.Text)):C0} đ";
             }
             catch (Exception ex)
             {
@@ -109,7 +109,7 @@ namespace DoAnLapTrinhWindows.User
                     var book = contextDB.BOOKS.FirstOrDefault(b => b.ID_BOOK == idBook1);
                     if (book != null)
                     {
-                        int quantity = int.Parse(book.QUANTITY.ToString());
+                        int quantity =  int.Parse(book.QUANTITY.ToString());
                         int quantityBuy = int.Parse(txtQuantity.Text);
 
                         if (quantity < quantityBuy)

@@ -16,7 +16,7 @@ namespace DoAnLapTrinhWindows.User
 {
     public partial class BookForm : Form
     {
-        private int currentPage = 1; 
+        private int currentPage = 1;
         private int itemsPerPage = 10;
         private int totalPages = 1;
         private int idUser1;
@@ -43,7 +43,6 @@ namespace DoAnLapTrinhWindows.User
             }
         }
 
-        
         public void LoadBooks(int page)
         {
             using (DBModels context = new DBModels())

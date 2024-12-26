@@ -60,50 +60,82 @@ namespace DoAnLapTrinhWindows.User
             }
         }
 
+        //private void LoadBook()
+        //{
+        //    var book = context.BOOKS.FirstOrDefault(b => b.NAME_BOOK == "Design Patterns: Elements of Reusable Object-Oriented Software");
+        //    if (book != null)
+        //    {
+        //        this.LoadImage(book);
+        //        var bookName = book.NAME_BOOK.Split();
+        //        var j = 0;
+        //        for (int i = 0; i < bookName.Length; i++)
+        //        {
+        //            if (i == 4)
+        //                this.lblBookName.Text += "\n";
+        //            else
+        //                this.lblBookName.Text += bookName[i] + " ";
+        //        }
+
+        //        this.lblMoney.Text = "";
+        //        string priceString = book.PRICE.ToString();
+        //        int length = priceString.Length;
+        //        for (int i = 0; i < length; i++)
+        //        {
+        //            if (i > 0 && (length - i) % 3 == 0)
+        //            {
+        //                this.lblMoney.Text += ",";
+        //            }
+        //            this.lblMoney.Text += priceString[i];
+        //        }
+        //        this.lblMoney.Text += " VND";
+
+        //        this.lblAuthor.Text = book.AUTHOR;
+        //        this.lblCategory.Text = book.CATEGORY;
+        //        if (book.QUANTITY > 0)
+        //        {
+        //            this.lblStatus.Text = "In stock: " + book.QUANTITY;
+        //            this.lblStatus.ForeColor = Color.Green;
+        //        }
+        //        else
+        //        {
+        //            this.lblStatus.Text = "Out of stock";
+        //            this.lblStatus.ForeColor = Color.Red;
+        //        }
+        //    }
+        //}
         private void LoadBook()
         {
-            var book = context.BOOKS.FirstOrDefault(b => b.NAME_BOOK == "Design Patterns: Elements of Reusable Object-Oriented Software");
-            if(book != null)
+            lblBookName.Text = book.NAME_BOOK;
+
+            string priceString = book.PRICE.ToString();
+            int length = priceString.Length;
+
+            this.lblMoney.Text = "";
+            for (int i = 0; i < length; i++)
             {
-                this.LoadImage(book);
-                var bookName = book.NAME_BOOK.Split();
-                var j = 0;
-                for (int i = 0; i < bookName.Length; i++)
+                if (i > 0 && (length - i) % 3 == 0)
                 {
-                    if (i == 4)
-                        this.lblBookName.Text += "\n";
-                    else
-                        this.lblBookName.Text += bookName[i] + " ";
+                    this.lblMoney.Text += ",";
                 }
+                this.lblMoney.Text += priceString[i];
+            }
+            this.lblMoney.Text += " VND";
 
-                this.lblMoney.Text = "";
-                string priceString = book.PRICE.ToString();
-                int length = priceString.Length;
-                for (int i = 0; i < length; i++)
-                {
-                    if (i > 0 && (length - i) % 3 == 0)
-                    {
-                        this.lblMoney.Text += ",";
-                    }
-                    this.lblMoney.Text += priceString[i];
-                }
-                this.lblMoney.Text += " VND";
 
-                this.lblAuthor.Text = book.AUTHOR;
-                this.lblCategory.Text = book.CATEGORY;
-                if(book.QUANTITY > 0)
-                {
-                    this.lblStatus.Text = "In stock: " + book.QUANTITY;
-                    this.lblStatus.ForeColor = Color.Green;
-                }
-                else
-                {
-                    this.lblStatus.Text = "Out of stock";
-                    this.lblStatus.ForeColor = Color.Red;
-                }
+            lblAuthor.Text = book.AUTHOR;
+            lblCategory.Text = book.CATEGORY;
+
+            if (book.QUANTITY > 0)
+            {
+                lblStatus.Text = $"In stock: {book.QUANTITY}";
+                lblStatus.ForeColor = Color.Green;
+            }
+            else
+            {
+                lblStatus.Text = "Out of stock";
+                lblStatus.ForeColor = Color.Red;
             }
         }
-
         private void LoadUser()
         {
             try
@@ -119,13 +151,56 @@ namespace DoAnLapTrinhWindows.User
 
         private void DetailedBookForm_Load(object sender, EventArgs e)
         {
+            this.LoadImage(this.book);
             this.LoadBook();
             this.LoadUser();
         }
 
         private void btnBuy_Click(object sender, EventArgs e)
         {
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    int quantityBuy = int.Parse(txtAmount.Text);
 
+                    if (quantityBuy <= 0)
+                    {
+                        MessageBox.Show("Vui lòng nhập số lượng lớn hơn 0.",
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    var currentBook = context.BOOKS.FirstOrDefault(b => b.ID_BOOK == book.ID_BOOK);
+                    if (currentBook != null)
+                    { 
+                        if (currentBook.QUANTITY < quantityBuy)
+                        {
+                            MessageBox.Show($"Số lượng tồn chỉ còn: {currentBook.QUANTITY}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        currentBook.QUANTITY -= quantityBuy;
+                        string totalPrice = $"{currentBook.PRICE * quantityBuy:C0}";
+                        InvoiceDetail invoiceDetailForm = new InvoiceDetail(currentBook.ID_BOOK, quantityBuy, totalPrice, user.ID_USER);
+                        this.Hide();
+                        invoiceDetailForm.ShowDialog();
+                        this.Close();
+
+                        transaction.Commit();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy sách trong cơ sở dữ liệu.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
+
+
     }
 }

@@ -21,7 +21,7 @@ namespace DoAnLapTrinhWindows.Models
         [StringLength(20)]
         public string USERNAME { get; set; }
 
-        [StringLength(20)]
+        [StringLength(200)]
         public string PASSWORD1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
