@@ -29,6 +29,11 @@ namespace DoAnLapTrinhWindows
                 string userName = txt_userName.Text.Trim();
                 string password = txt_password.Text.Trim();
                 string confirmPassword = txt_ConfirmPass.Text.Trim();
+                if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 var user = context.USER_ACCOUNTS
                         .FirstOrDefault(u => u.USERNAME == userName);
                 if (user == null) 

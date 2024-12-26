@@ -60,7 +60,10 @@ namespace DoAnLapTrinhWindows
                 else
                 {
                     MessageBox.Show("Đăng nhập thất bại");
-                    MessageBox.Show(PassWord + "\n" + admin.PASSWORD1 + "\n" + verifyPassword.ToString());
+                    if (admin == null)
+                    {
+                        MessageBox.Show(PassWord + "\n" + user.PASSWORD1 + "\n" + verifyPassword.ToString());
+                    }
                 }
             }
             catch (Exception ex) 
