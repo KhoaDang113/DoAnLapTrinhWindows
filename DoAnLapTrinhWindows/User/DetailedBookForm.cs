@@ -1,13 +1,18 @@
 ﻿
 using DoAnLapTrinhWindows.Models;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Caching;
 using System.Windows.Forms;
 
 namespace DoAnLapTrinhWindows.User
@@ -32,32 +37,63 @@ namespace DoAnLapTrinhWindows.User
             InitializeComponent();
         }
 
-        private void LoadImage(BOOK book)
+        public void LoadImage(string url, string bookId)
         {
-            if (book.LINK_IMG.Contains("http"))
+            try
             {
-                string imageUrl = book.LINK_IMG;
-                try
+                var connection = Redis.RedisConnectorHelper.Connection;
+                var cache = connection.GetDatabase();
+
+                if (cache.KeyExists(bookId))
                 {
-                    System.Net.WebRequest request = System.Net.WebRequest.Create(imageUrl);
-                    using (System.Net.WebResponse response = request.GetResponse())
-                    using (System.IO.Stream stream = response.GetResponseStream())
+                    LoadImageFromCache(cache, bookId);
+                }
+                else
+                {
+                    if (url.Contains("http"))
                     {
-                        if (stream != null)
-                            this.picBook.Image = Image.FromStream(stream);
-                        else
-                            MessageBox.Show("Failed to load image stream.");
+                        LoadImageFromUrl(url, bookId, cache);
+                    }
+                    else
+                    {
+                        LoadImageFromFile(url, bookId, cache);
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred: " + ex.Message);
-                }
             }
-            else
+            catch (Exception e)
             {
-                this.picBook.Image = Image.FromFile(book.LINK_IMG);
+                MessageBox.Show("Error loading images: " + e.Message);
             }
+        }
+
+        private void LoadImageFromCache(IDatabase cache, string bookId)
+        {
+            byte[] imageBytes = Convert.FromBase64String(cache.StringGet(bookId));
+            using (MemoryStream memoryStream = new MemoryStream(imageBytes))
+            {
+                picBook.Image = Image.FromStream(memoryStream);
+            }
+        }
+
+        private void LoadImageFromUrl(string url, string bookId, IDatabase cache)
+        {
+            WebRequest request = System.Net.WebRequest.Create(url);
+            using (WebResponse response = request.GetResponse())
+            using (System.IO.Stream stream = response.GetResponseStream())
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                byte[] imageBytes = memoryStream.ToArray();
+                picBook.Image = Image.FromStream(new MemoryStream(imageBytes));
+                cache.StringSet(bookId, Convert.ToBase64String(imageBytes));
+            }
+        }
+
+        private void LoadImageFromFile(string filePath, string bookId, IDatabase cache)
+        {
+            byte[] imageBytes = File.ReadAllBytes(filePath);
+            picBook.Image = Image.FromFile(filePath);
+            cache.StringSet(bookId, Convert.ToBase64String(imageBytes));
         }
 
         //private void LoadBook()
@@ -151,7 +187,7 @@ namespace DoAnLapTrinhWindows.User
 
         private void DetailedBookForm_Load(object sender, EventArgs e)
         {
-            this.LoadImage(this.book);
+            this.LoadImage(this.book.LINK_IMG, this.book.ID_BOOK.ToString());
             this.LoadBook();
             this.LoadUser();
         }

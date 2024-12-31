@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DoAnLapTrinhWindows.Models;
@@ -64,8 +65,8 @@ namespace DoAnLapTrinhWindows.User
                         idBook = book.ID_BOOK,
                         idUser = idUser1,
                     };
-                    bookItem.LoadImageFromUrl(book.LINK_IMG);
-
+                    bookItem.LoadImage(book.LINK_IMG, book.ID_BOOK.ToString());
+                    Thread.Sleep(200);
                     flpBookList.Controls.Add(bookItem);
                 }
             }
