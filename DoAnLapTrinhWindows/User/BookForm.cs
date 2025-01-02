@@ -27,14 +27,9 @@ namespace DoAnLapTrinhWindows.User
             idUser1 = IDUser;
             InitializeComponent();
             CalculateTotalPages();
-            LoadBooks(currentPage);
+            
         }
-        public BookForm()
-        {
-            InitializeComponent();
-            CalculateTotalPages();
-            LoadBooks(currentPage);
-        }
+
         private void CalculateTotalPages()
         {
             using (DBModels context = new DBModels())
@@ -66,7 +61,7 @@ namespace DoAnLapTrinhWindows.User
                         idUser = idUser1,
                     };
                     bookItem.LoadImage(book.LINK_IMG, book.ID_BOOK.ToString());
-                    Thread.Sleep(200);
+                    //Thread.Sleep(200);
                     flpBookList.Controls.Add(bookItem);
                 }
             }
@@ -148,5 +143,9 @@ namespace DoAnLapTrinhWindows.User
             }
         }
 
+        private void BookForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

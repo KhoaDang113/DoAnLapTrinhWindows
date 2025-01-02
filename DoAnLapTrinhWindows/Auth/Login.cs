@@ -28,24 +28,36 @@ namespace DoAnLapTrinhWindows
         {
             try
             {
-                string UserName = txt_userName.Text.Trim();
-                string PassWord = txt_password.Text.Trim();
+                string userName = txt_userName.Text.Trim();
+                string password = txt_password.Text.Trim();
                 bool verifyPassword = false;
-                var user = context.USER_ACCOUNTS
-                        .FirstOrDefault(u => u.USERNAME == UserName);
-                var admin = context.ADMIN_ACCOUNTS
-                        .FirstOrDefault(u => u.ADMINNAME == UserName);
+
+                var user = context.USER_ACCOUNTS.FirstOrDefault(u => u.USERNAME == userName);
+                var admin = context.ADMIN_ACCOUNTS.FirstOrDefault(u => u.ADMINNAME == userName);
 
                 if (user != null)
-                    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, user.PASSWORD1);
+                {
+                    verifyPassword = BCrypt.Net.BCrypt.EnhancedVerify(password, user.PASSWORD1);
+                    if (!verifyPassword)
+                    {
+                        verifyPassword = BCrypt.Net.BCrypt.Verify(password, user.PASSWORD1);
+                    }
+                }
                 else if (admin != null)
-                    verifyPassword = BCrypt.Net.BCrypt.Verify(PassWord, admin.PASSWORD1);
+                {
+                    verifyPassword = BCrypt.Net.BCrypt.EnhancedVerify(password, admin.PASSWORD1);
+                    if (!verifyPassword)
+                    {
+                        verifyPassword = BCrypt.Net.BCrypt.Verify(password, admin.PASSWORD1);
+                    }
+                }
+
                 if ((user != null || admin != null) && verifyPassword)
                 {
-                    MessageBox.Show("Đăng nhập thành công");
+                    MessageBox.Show("Login successful");
                     if (user != null)
                     {
-                        var IDUser = context.USER_ACCOUNTS.FirstOrDefault(u => u.USERNAME == UserName).ID_USER;
+                        var IDUser = user.ID_USER;
                         BookForm userForm = new BookForm(IDUser);
                         this.Hide();
                         userForm.ShowDialog();
@@ -59,25 +71,19 @@ namespace DoAnLapTrinhWindows
                 }
                 else
                 {
-                    MessageBox.Show("Đăng nhập thất bại");
-                    if (admin == null)
-                    {
-                        MessageBox.Show(PassWord + "\n" + user.PASSWORD1 + "\n" + verifyPassword.ToString());
-                    }
+                    MessageBox.Show("Login failed. Please check your username and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex) 
-            { 
-                MessageBox.Show(ex.Message);    
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-
         private void btn_Signup_Click(object sender, EventArgs e)
         {
-            Form f = new Sign_Up();
-            f.ShowDialog();
-            this.Close();
+            Form signUpForm = new Sign_Up();
+            signUpForm.ShowDialog();
         }
     }
 }

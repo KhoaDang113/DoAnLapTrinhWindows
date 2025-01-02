@@ -1,9 +1,12 @@
 ﻿using DoAnLapTrinhWindows.Models;
+using DoAnLapTrinhWindows.Redis;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -101,6 +104,34 @@ namespace DoAnLapTrinhWindows.Admin
             }
         }
 
+        private void SaveToRedis(string bookId, string imageStream)
+        {
+            var connection = RedisConnectorHelper.Connection;
+            var cache = connection.GetDatabase();
+            cache.StringSet(bookId, imageStream);
+        }
+
+        private void LoadImageFromUrl(string url, string bookId)
+        {
+            System.Net.WebRequest request = System.Net.WebRequest.Create(url);
+            using (System.Net.WebResponse response = request.GetResponse())
+            using (System.IO.Stream stream = response.GetResponseStream())
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                byte[] imageBytes = memoryStream.ToArray();
+                picBookImage.Image = Image.FromStream(new MemoryStream(imageBytes));
+                SaveToRedis(bookId, Convert.ToBase64String(imageBytes));
+            }
+        }
+
+        private void LoadImageFromFile(string filePath, string bookId)
+        {
+            byte[] imageBytes = File.ReadAllBytes(filePath);
+            picBookImage.Image = Image.FromFile(filePath);
+            SaveToRedis(bookId, Convert.ToBase64String(imageBytes));
+        }
+
         private void btnAddBook_Click(object sender, EventArgs e)
         {
             try
@@ -137,6 +168,14 @@ namespace DoAnLapTrinhWindows.Admin
                     };
                     context.BOOKS.Add(book);
                     context.SaveChanges();
+                    if(imageLink.Contains("http"))
+                    {
+                        LoadImageFromUrl(imageLink, book.ID_BOOK.ToString());
+                    }
+                    else
+                    {
+                        LoadImageFromFile(imageLink, book.ID_BOOK.ToString());
+                    }
                     MessageBox.Show("Book successfully added");
                     this.Clear();
                 }

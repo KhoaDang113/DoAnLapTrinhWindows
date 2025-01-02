@@ -44,12 +44,11 @@ namespace DoAnLapTrinhWindows
                         {
                             ID_USER = context.USER_ACCOUNTS.ToList().Count,
                             USERNAME = userName,
-                            PASSWORD1 = BCrypt.Net.BCrypt.EnhancedHashPassword(password,4),
+                            PASSWORD1 = BCrypt.Net.BCrypt.EnhancedHashPassword(password, 13),
                         };
                         context.USER_ACCOUNTS.Add(uSER_ACCOUNT);
                         context.SaveChanges();
                         MessageBox.Show("Đăng ký thành công");
-                        this.Close();
                     }
                     else
                     {

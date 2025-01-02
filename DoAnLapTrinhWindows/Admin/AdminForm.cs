@@ -139,8 +139,6 @@ namespace DoAnLapTrinhWindows
 
         private void CreateInvoiceView()
         {
-            Dictionary<int, string> userDictionary = new Dictionary<int, string>();
-            Dictionary<int, string> bookDictionary = new Dictionary<int, string>();
 
             this.dgv.Columns.Clear();
             this.dgv.Rows.Clear();
@@ -151,13 +149,8 @@ namespace DoAnLapTrinhWindows
             this.dgv.Columns.Add("TOTAL", "Tổng tiền");
             this.dgv.Columns.Add("DATE", "Ngày mua");
 
-            foreach (var user in context.USER_ACCOUNTS)
-                userDictionary.Add(user.ID_USER, user.USERNAME);
-            foreach (var book in context.BOOKS)
-                bookDictionary.Add(book.ID_BOOK, book.NAME_BOOK);
-
             foreach (var invoice in context.INVOICE_DETAILS)
-                this.dgv.Rows.Add(userDictionary[invoice.ID_USER], bookDictionary[invoice.ID_BOOK], invoice.BUY_QUANTITY, invoice.TOTAL, invoice.BUY_DATE);
+                this.dgv.Rows.Add(invoice.USER_ACCOUNT.USERNAME, invoice.BOOK.NAME_BOOK, invoice.BUY_QUANTITY, invoice.TOTAL, invoice.BUY_DATE);
         }
 
         private bool changeBookData(DataGridViewRow row)
@@ -278,10 +271,20 @@ namespace DoAnLapTrinhWindows
             {
                 if (row.IsNewRow)
                     continue;
-                if (row.Cells[1].Value.ToString().ToLower().Contains(search))
-                    row.Visible = true;
+                if (selectedButton.Equals("Books"))
+                {
+                    if (row.Cells[1].Value.ToString().ToLower().Contains(search))
+                        row.Visible = true;
+                    else
+                        row.Visible = false;
+                }
                 else
-                    row.Visible = false;
+                {
+                    if (row.Cells[0].Value.ToString().ToLower().Contains(search))
+                        row.Visible = true;
+                    else
+                        row.Visible = false;
+                }
             }
         }
 

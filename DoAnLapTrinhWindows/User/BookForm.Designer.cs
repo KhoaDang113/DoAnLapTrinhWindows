@@ -43,9 +43,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flpBookList.AutoScroll = true;
-            this.flpBookList.Location = new System.Drawing.Point(27, 51);
+            this.flpBookList.Location = new System.Drawing.Point(20, 41);
+            this.flpBookList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.flpBookList.Name = "flpBookList";
-            this.flpBookList.Size = new System.Drawing.Size(1144, 632);
+            this.flpBookList.Size = new System.Drawing.Size(858, 514);
             this.flpBookList.TabIndex = 0;
             // 
             // guna2HtmlLabel1
@@ -56,8 +57,9 @@
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.Black;
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(0, 0);
+            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(1180, 45);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(885, 37);
             this.guna2HtmlLabel1.TabIndex = 1;
             this.guna2HtmlLabel1.Text = "Kệ Sách Thần Kì";
             this.guna2HtmlLabel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -67,9 +69,10 @@
             // 
             this.btnPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnPrev.ForeColor = System.Drawing.Color.DeepPink;
-            this.btnPrev.Location = new System.Drawing.Point(449, 697);
+            this.btnPrev.Location = new System.Drawing.Point(337, 566);
+            this.btnPrev.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(40, 31);
+            this.btnPrev.Size = new System.Drawing.Size(30, 25);
             this.btnPrev.TabIndex = 2;
             this.btnPrev.Text = "<";
             this.btnPrev.UseVisualStyleBackColor = true;
@@ -79,9 +82,10 @@
             // 
             this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnNext.ForeColor = System.Drawing.Color.DeepPink;
-            this.btnNext.Location = new System.Drawing.Point(709, 697);
+            this.btnNext.Location = new System.Drawing.Point(532, 566);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(40, 31);
+            this.btnNext.Size = new System.Drawing.Size(30, 25);
             this.btnNext.TabIndex = 3;
             this.btnNext.Text = ">";
             this.btnNext.UseVisualStyleBackColor = true;
@@ -91,9 +95,10 @@
             // 
             this.btnLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnLast.ForeColor = System.Drawing.Color.DeepPink;
-            this.btnLast.Location = new System.Drawing.Point(657, 697);
+            this.btnLast.Location = new System.Drawing.Point(493, 566);
+            this.btnLast.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLast.Name = "btnLast";
-            this.btnLast.Size = new System.Drawing.Size(46, 31);
+            this.btnLast.Size = new System.Drawing.Size(34, 25);
             this.btnLast.TabIndex = 4;
             this.btnLast.Text = "Last";
             this.btnLast.UseVisualStyleBackColor = true;
@@ -103,9 +108,10 @@
             // 
             this.btnFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnFirst.ForeColor = System.Drawing.Color.DeepPink;
-            this.btnFirst.Location = new System.Drawing.Point(495, 697);
+            this.btnFirst.Location = new System.Drawing.Point(371, 566);
+            this.btnFirst.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(46, 31);
+            this.btnFirst.Size = new System.Drawing.Size(34, 25);
             this.btnFirst.TabIndex = 5;
             this.btnFirst.Text = "First";
             this.btnFirst.UseVisualStyleBackColor = true;
@@ -123,13 +129,13 @@
             this.txtPageNumber.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtPageNumber.ForeColor = System.Drawing.Color.Black;
             this.txtPageNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtPageNumber.Location = new System.Drawing.Point(559, 697);
-            this.txtPageNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPageNumber.Location = new System.Drawing.Point(419, 566);
+            this.txtPageNumber.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtPageNumber.Name = "txtPageNumber";
             this.txtPageNumber.PasswordChar = '\0';
             this.txtPageNumber.PlaceholderText = "";
             this.txtPageNumber.SelectedText = "";
-            this.txtPageNumber.Size = new System.Drawing.Size(79, 31);
+            this.txtPageNumber.Size = new System.Drawing.Size(59, 25);
             this.txtPageNumber.TabIndex = 6;
             this.txtPageNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPageNumber.TextChanged += new System.EventHandler(this.txtPageNumber_TextChanged);
@@ -137,9 +143,9 @@
             // 
             // BookForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 740);
+            this.ClientSize = new System.Drawing.Size(885, 601);
             this.Controls.Add(this.txtPageNumber);
             this.Controls.Add(this.btnFirst);
             this.Controls.Add(this.btnLast);
@@ -147,9 +153,11 @@
             this.Controls.Add(this.btnPrev);
             this.Controls.Add(this.guna2HtmlLabel1);
             this.Controls.Add(this.flpBookList);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "BookForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BookForm";
+            this.Load += new System.EventHandler(this.BookForm_Load);
             this.ResumeLayout(false);
 
         }

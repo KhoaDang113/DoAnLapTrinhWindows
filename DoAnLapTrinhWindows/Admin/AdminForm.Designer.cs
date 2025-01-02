@@ -69,11 +69,10 @@
             // dgv
             // 
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Location = new System.Drawing.Point(-4, 319);
-            this.dgv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgv.Location = new System.Drawing.Point(-3, 259);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 51;
-            this.dgv.Size = new System.Drawing.Size(1340, 273);
+            this.dgv.Size = new System.Drawing.Size(1005, 222);
             this.dgv.TabIndex = 0;
             this.dgv.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellValueChanged);
             // 
@@ -88,9 +87,9 @@
             this.toolStripButtonAnalyze,
             this.toolStripButtonSort,
             this.toolStripButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(-4, 284);
+            this.toolStrip1.Location = new System.Drawing.Point(-3, 231);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(321, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(275, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -99,7 +98,7 @@
             this.toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton.Image")));
             this.toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton.Name = "toolStripButton";
-            this.toolStripButton.Size = new System.Drawing.Size(73, 24);
+            this.toolStripButton.Size = new System.Drawing.Size(63, 24);
             this.toolStripButton.Text = "Books";
             this.toolStripButton.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
@@ -108,7 +107,7 @@
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(86, 24);
+            this.toolStripButton2.Size = new System.Drawing.Size(74, 24);
             this.toolStripButton2.Text = "Invoices";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
@@ -122,7 +121,7 @@
             this.toolStripButtonAnalyze.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAnalyze.Image")));
             this.toolStripButtonAnalyze.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAnalyze.Name = "toolStripButtonAnalyze";
-            this.toolStripButtonAnalyze.Size = new System.Drawing.Size(85, 24);
+            this.toolStripButtonAnalyze.Size = new System.Drawing.Size(72, 24);
             this.toolStripButtonAnalyze.Text = "Analyze";
             this.toolStripButtonAnalyze.ToolTipText = "analyze";
             this.toolStripButtonAnalyze.Click += new System.EventHandler(this.toolStripButtonAnalyze_Click);
@@ -133,7 +132,7 @@
             this.toolStripButtonSort.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSort.Image")));
             this.toolStripButtonSort.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSort.Name = "toolStripButtonSort";
-            this.toolStripButtonSort.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonSort.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonSort.Text = "sortDesc";
             this.toolStripButtonSort.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
@@ -143,7 +142,7 @@
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton3.Size = new System.Drawing.Size(24, 24);
             this.toolStripButton3.Text = "sortAsc";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton_Click);
             // 
@@ -154,7 +153,8 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1352, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1014, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -164,39 +164,37 @@
             this.toolStripThoat,
             this.ToolStripMenuAddBook});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // toolStripThoat
             // 
             this.toolStripThoat.Name = "toolStripThoat";
-            this.toolStripThoat.Size = new System.Drawing.Size(164, 26);
+            this.toolStripThoat.Size = new System.Drawing.Size(131, 22);
             this.toolStripThoat.Text = "Thoát";
             this.toolStripThoat.Click += new System.EventHandler(this.toolStripThoat_Click);
             // 
             // ToolStripMenuAddBook
             // 
             this.ToolStripMenuAddBook.Name = "ToolStripMenuAddBook";
-            this.ToolStripMenuAddBook.Size = new System.Drawing.Size(164, 26);
+            this.ToolStripMenuAddBook.Size = new System.Drawing.Size(131, 22);
             this.ToolStripMenuAddBook.Text = "Add books";
             this.ToolStripMenuAddBook.Click += new System.EventHandler(this.ToolStripMenuAddBook_Click);
             // 
             // lblTimKiem
             // 
             this.lblTimKiem.AutoSize = true;
-            this.lblTimKiem.Location = new System.Drawing.Point(1116, 288);
-            this.lblTimKiem.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTimKiem.Location = new System.Drawing.Point(837, 234);
             this.lblTimKiem.Name = "lblTimKiem";
-            this.lblTimKiem.Size = new System.Drawing.Size(33, 16);
+            this.lblTimKiem.Size = new System.Drawing.Size(27, 13);
             this.lblTimKiem.TabIndex = 3;
             this.lblTimKiem.Text = "Find";
             // 
             // txtTimKiem
             // 
-            this.txtTimKiem.Location = new System.Drawing.Point(1203, 284);
-            this.txtTimKiem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTimKiem.Location = new System.Drawing.Point(902, 231);
             this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(132, 22);
+            this.txtTimKiem.Size = new System.Drawing.Size(100, 20);
             this.txtTimKiem.TabIndex = 4;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
@@ -205,17 +203,16 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStriplblUserName});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 597);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 484);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1352, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(1014, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStriplblUserName
             // 
             this.toolStriplblUserName.Name = "toolStriplblUserName";
-            this.toolStriplblUserName.Size = new System.Drawing.Size(153, 20);
+            this.toolStriplblUserName.Size = new System.Drawing.Size(120, 17);
             this.toolStriplblUserName.Text = "toolStriplblUserName";
             // 
             // chart1
@@ -240,10 +237,9 @@
             this.dataChart.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.dataChart.Legends.Add(legend2);
-            this.dataChart.Location = new System.Drawing.Point(0, 319);
-            this.dataChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataChart.Location = new System.Drawing.Point(0, 259);
             this.dataChart.Name = "dataChart";
-            this.dataChart.Size = new System.Drawing.Size(809, 273);
+            this.dataChart.Size = new System.Drawing.Size(607, 222);
             this.dataChart.TabIndex = 6;
             this.dataChart.Text = "chart2";
             this.dataChart.Visible = false;
@@ -251,10 +247,9 @@
             // lblYearTotal
             // 
             this.lblYearTotal.AutoSize = true;
-            this.lblYearTotal.Location = new System.Drawing.Point(16, 255);
-            this.lblYearTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblYearTotal.Location = new System.Drawing.Point(12, 207);
             this.lblYearTotal.Name = "lblYearTotal";
-            this.lblYearTotal.Size = new System.Drawing.Size(0, 16);
+            this.lblYearTotal.Size = new System.Drawing.Size(0, 13);
             this.lblYearTotal.TabIndex = 7;
             // 
             // dataPieChart
@@ -263,10 +258,9 @@
             this.dataPieChart.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             this.dataPieChart.Legends.Add(legend3);
-            this.dataPieChart.Location = new System.Drawing.Point(808, 319);
-            this.dataPieChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataPieChart.Location = new System.Drawing.Point(606, 259);
             this.dataPieChart.Name = "dataPieChart";
-            this.dataPieChart.Size = new System.Drawing.Size(528, 273);
+            this.dataPieChart.Size = new System.Drawing.Size(396, 222);
             this.dataPieChart.TabIndex = 8;
             this.dataPieChart.Text = " ";
             this.dataPieChart.Visible = false;
@@ -274,19 +268,18 @@
             // lblYear
             // 
             this.lblYear.AutoSize = true;
-            this.lblYear.Location = new System.Drawing.Point(861, 293);
-            this.lblYear.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblYear.Location = new System.Drawing.Point(646, 238);
             this.lblYear.Name = "lblYear";
-            this.lblYear.Size = new System.Drawing.Size(70, 16);
+            this.lblYear.Size = new System.Drawing.Size(58, 13);
             this.lblYear.TabIndex = 9;
             this.lblYear.Text = "Year total: ";
             this.lblYear.Visible = false;
             // 
             // AdminForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1352, 623);
+            this.ClientSize = new System.Drawing.Size(1014, 506);
             this.Controls.Add(this.lblYear);
             this.Controls.Add(this.dataPieChart);
             this.Controls.Add(this.lblYearTotal);
@@ -298,9 +291,8 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dgv);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AdminForm";
-            this.Text = "Form1";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.AdminForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.toolStrip1.ResumeLayout(false);
