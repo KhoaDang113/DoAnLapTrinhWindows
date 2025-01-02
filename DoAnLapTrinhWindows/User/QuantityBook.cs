@@ -125,6 +125,7 @@ namespace DoAnLapTrinhWindows.User
                             this.Hide();
                             bookBook.ShowDialog();
                             this.Close();
+                            contextDB.SaveChanges();
                             transaction.Commit();
                             //MessageBox.Show($"Đã mua thành công");
                         }
