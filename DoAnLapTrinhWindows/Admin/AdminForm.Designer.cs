@@ -57,6 +57,7 @@
             this.lblYearTotal = new System.Windows.Forms.Label();
             this.dataPieChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblYear = new System.Windows.Forms.Label();
+            this.tsbExport = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -86,10 +87,11 @@
             this.toolStripSeparator1,
             this.toolStripButtonAnalyze,
             this.toolStripButtonSort,
-            this.toolStripButton3});
+            this.toolStripButton3,
+            this.tsbExport});
             this.toolStrip1.Location = new System.Drawing.Point(-3, 231);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(275, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(399, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -275,6 +277,15 @@
             this.lblYear.Text = "Year total: ";
             this.lblYear.Visible = false;
             // 
+            // tsbExport
+            // 
+            this.tsbExport.Image = ((System.Drawing.Image)(resources.GetObject("tsbExport.Image")));
+            this.tsbExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbExport.Name = "tsbExport";
+            this.tsbExport.Size = new System.Drawing.Size(93, 24);
+            this.tsbExport.Text = "Export Excel";
+            this.tsbExport.Click += new System.EventHandler(this.tsbExport_Click);
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,5 +343,6 @@
         private System.Windows.Forms.Label lblYear;
         private System.Windows.Forms.ToolStripButton toolStripButtonSort;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton tsbExport;
     }
 }

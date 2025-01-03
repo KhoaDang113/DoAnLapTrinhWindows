@@ -295,5 +295,72 @@ namespace DoAnLapTrinhWindows
             this.DrawDataChart();
             this.DrawDataPieChart();
         }
+
+        private void tsbExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var invoiceDetails = context.INVOICE_DETAILS
+                    .ToList()
+                    .Select(x => new
+                    {
+                        x.ID_INVOICE_DETAILS,
+                        x.ID_USER,
+                        x.ID_BOOK,
+                        x.BUY_QUANTITY,
+                        x.TOTAL,
+                        BUY_DATE = x.BUY_DATE.HasValue ? x.BUY_DATE.Value.ToString("yyyy-MM-dd") : ""
+                    }).ToList();
+
+                using (var workbook = new ClosedXML.Excel.XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add("Invoice Details");
+
+                    worksheet.Cell(1, 1).Value = "ID Invoice Details";
+                    worksheet.Cell(1, 2).Value = "ID User";
+                    worksheet.Cell(1, 3).Value = "ID Book";
+                    worksheet.Cell(1, 4).Value = "Buy Quantity";
+                    worksheet.Cell(1, 5).Value = "Total";
+                    worksheet.Cell(1, 6).Value = "Buy Date";
+
+                    int currentRow = 2;
+                    foreach (var detail in invoiceDetails)
+                    {
+                        worksheet.Cell(currentRow, 1).Value = detail.ID_INVOICE_DETAILS;
+                        worksheet.Cell(currentRow, 2).Value = detail.ID_USER;
+                        worksheet.Cell(currentRow, 3).Value = detail.ID_BOOK;
+                        worksheet.Cell(currentRow, 4).Value = detail.BUY_QUANTITY;
+                        worksheet.Cell(currentRow, 5).Value = detail.TOTAL;
+                        worksheet.Cell(currentRow, 6).Value = detail.BUY_DATE;
+                        currentRow++;
+                    }
+
+                    using (var saveFileDialog = new SaveFileDialog
+                    {
+                        Filter = "Excel Files|*.xlsx",
+                        Title = "Save an Excel File"
+                    })
+                    {
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            workbook.SaveAs(saveFileDialog.FileName);
+                            MessageBox.Show("Export successful!",
+                                            "Success",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Information);
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"ERROR: {ex.Message}",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+        }
+
     }
 }
