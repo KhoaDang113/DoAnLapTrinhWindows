@@ -114,6 +114,7 @@ namespace DoAnLapTrinhWindows
                     this.dataPieChart.Series["Total"].Points[pointIndex].ToolTip = $"Month: {monthName}, Total: {item.Value}";
                 }
             }
+            this.lblYear.Text = "Year total: ";
             this.lblYear.Text += yearTotal.ToString();
         }
 

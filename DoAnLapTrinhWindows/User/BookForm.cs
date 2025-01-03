@@ -7,6 +7,7 @@ using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace DoAnLapTrinhWindows.User
             idUser1 = IDUser;
             InitializeComponent();
             CalculateTotalPages();
-            
+
         }
 
         private void CalculateTotalPages()
@@ -143,8 +144,38 @@ namespace DoAnLapTrinhWindows.User
             }
         }
 
+
+
         private void BookForm_Load(object sender, EventArgs e)
         {
+            LoadBooks(currentPage);
+        }
+
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            using (DBModels context = new DBModels())
+            {
+                this.flpBookList.Controls.Clear();
+                var books = context.BOOKS
+                                  .OrderBy(b => b.ID_BOOK)
+                                  .Skip((currentPage - 1) * itemsPerPage)
+                                  .Take(itemsPerPage)
+                                  .Where(b => b.NAME_BOOK.Contains(this.txtTimKiem.Text))
+                                  .ToList();
+
+                foreach (var book in books)
+                {
+                    var bookItem = new BookItem
+                    {
+                        Title = book.NAME_BOOK,
+                        Price = int.Parse(book.PRICE.ToString()),
+                        idBook = book.ID_BOOK,
+                        idUser = idUser1,
+                    };
+                    bookItem.LoadImage(book.LINK_IMG, book.ID_BOOK.ToString());
+                    flpBookList.Controls.Add(bookItem);
+                }
+            }
 
         }
     }

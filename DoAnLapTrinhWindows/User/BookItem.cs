@@ -66,10 +66,10 @@ namespace DoAnLapTrinhWindows.User
             string nameBook = lblNameBook.Text;
             Image imageBook = ptbImgBook.Image;
             string labelText = lblPriceBook.Text;
-            int price = int.Parse(labelText.Replace("$", "").Replace(" ", "").Replace("đ", "").Replace(",", "").Trim());
+            int price = int.Parse(labelText.Replace("$", "").Replace(" ", "").Replace("đ", "").Replace(",", "").Replace("₫", "").Replace(".", "").Trim());
             int idBook1 =  idBook;
             QuantityBook quantityBook = new QuantityBook(nameBook, imageBook, price, idBook1, idUser);
-            quantityBook.ShowDialog();
+            quantityBook.ShowDialog();  
         }
 
         public void LoadImage(string url, string bookId)
@@ -150,5 +150,5 @@ namespace DoAnLapTrinhWindows.User
                 }
             }
         }
-    }
+        }
 }

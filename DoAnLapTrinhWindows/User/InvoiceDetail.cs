@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using DoAnLapTrinhWindows.Models;
+using System;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DoAnLapTrinhWindows.Models;
 
 namespace DoAnLapTrinhWindows.User
 {
@@ -55,17 +48,17 @@ namespace DoAnLapTrinhWindows.User
                         ID_USER = idUser,
                         BUY_DATE = DateTime.Now,
                         BUY_QUANTITY = quantity,
-                        TOTAL = int.Parse(toltalPrice.Replace("$", "").Replace(" ", "").Replace("đ", "").Replace(",", "").Trim()),
+                        TOTAL = int.Parse(toltalPrice.Replace("$", "").Replace(" ", "").Replace("đ", "").Replace(",", "").Replace("₫", "").Replace(".", "").Trim()),
                     };
                     context.INVOICE_DETAILS.Add(record);
+                    
                     context.SaveChanges();
-
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message , "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
             }
