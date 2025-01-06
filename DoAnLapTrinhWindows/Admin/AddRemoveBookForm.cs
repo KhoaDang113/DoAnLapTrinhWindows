@@ -33,14 +33,15 @@ namespace DoAnLapTrinhWindows.Admin
         {
             if (this.picBookImage.Image != null)
             {
-                string directory = @"C:\Images";
-                if (!System.IO.Directory.Exists(directory))
+                string directory = "Images";
+                string folderPath = Path.Combine(Application.StartupPath, directory);
+                if (!System.IO.Directory.Exists(folderPath))
                 {
-                    System.IO.Directory.CreateDirectory(directory);
+                    System.IO.Directory.CreateDirectory(folderPath);
                 }
 
                 string fileName = System.IO.Path.GetFileName(imageFilePath);
-                string filePath = System.IO.Path.Combine(directory, fileName);
+                string filePath = System.IO.Path.Combine(folderPath, fileName);
 
                 this.picBookImage.Image.Save(filePath);
                 return filePath;

@@ -8,7 +8,7 @@ namespace DoAnLapTrinhWindows.Models
     public partial class DBModels : DbContext
     {
         public DBModels()
-            : base("name=DBModels2")
+            : base("name=DBModels3")
         {
         }
 

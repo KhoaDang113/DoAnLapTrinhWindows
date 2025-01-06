@@ -97,7 +97,10 @@ namespace DoAnLapTrinhWindows.User
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error loading images: " + e.Message);
+                //MessageBox.Show("Error loading images: " + e.Message);
+                var filePath = "Image/no-image.png";
+                var folderPath = Path.Combine(Application.StartupPath, filePath);
+                ptbImgBook.Image = Image.FromFile(folderPath);
             }
         }
 
